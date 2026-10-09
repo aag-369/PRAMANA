@@ -1,0 +1,16 @@
+[package]
+name = "pramana-hardware"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Hardware capability trajectories fitted from public roadmaps and verified demonstrations"
+
+[dependencies]
+pramana-units = { path = "../pramana-units" }
+serde = { workspace = true }
+thiserror = { workspace = true }
+toml = { workspace = true }
+rand = { workspace = true }
+rand_chacha = { workspace = true }
+rand_distr = { workspace = true }

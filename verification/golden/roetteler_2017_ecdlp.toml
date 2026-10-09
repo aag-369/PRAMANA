@@ -1,0 +1,87 @@
+# Published figures from Roetteler, Naehrig, Svore & Lauter 2017.
+#
+# HISTORICAL BASELINE. As of 2026 this construction is superseded by roughly 2,300x on
+# gate count and 2.8x on width (see verification/golden/ecdlp_2026_state_of_art.toml and
+# docs/RESEARCH.md section 1). It is retained because it is the anchor point of the
+# algorithmic-improvement series the risk engine needs to fit, not because it is a live
+# estimate of what an attacker would build today.
+#
+# Split into three entries deliberately. The logical qubit count and the leading
+# coefficient are structurally derivable and PRAMANA reproduces both. The absolute
+# Toffoli count includes an empirical regression term the source obtained by fitting its
+# own simulated circuits, which is not derivable from the published subroutine table;
+# that entry is expected to fail and carries a diagnosis rather than a widened tolerance.
+
+[[target]]
+id = "roetteler_2017_p256_qubits"
+circuit = "shor_ecdlp_rnsl"
+layer = "logical"
+
+[target.source]
+arxiv = "1706.06752"
+title = "Quantum resource estimates for computing elliptic curve discrete logarithms"
+journal = "ASIACRYPT 2017"
+year = 2017
+locus = "section 5, qubit count expression; Table 1"
+retrieved = "2026-08-28"
+
+[target.problem]
+kind = "ecdlp"
+curve_bits = 256
+
+[target.expected]
+logical_qubits = { value = 2330.0, tolerance_pct = 1.0, formula = "9n + 2 ceil(log2 n) + 10" }
+
+[[target]]
+id = "roetteler_2017_p256_leading_coefficient"
+circuit = "shor_ecdlp_rnsl"
+layer = "logical"
+
+[target.source]
+arxiv = "1706.06752"
+title = "Quantum resource estimates for computing elliptic curve discrete logarithms"
+year = 2017
+locus = "Fig. 11 discussion: 224 = 4*32 + 2*16 + 4*16, times 2n point additions"
+retrieved = "2026-08-28"
+
+[target.problem]
+kind = "ecdlp"
+curve_bits = 256
+
+[target.expected]
+leading_coefficient = { value = 448.0, tolerance_pct = 1.0, formula = "448 n^3 log2 n" }
+
+[target.notes]
+text = """
+This is the strongest form of the reproduction claim: 448 is never written in PRAMANA's
+source. It emerges from composing 4 inversions, 2 squarings and 4 multiplications into a
+point addition and iterating 2n times.
+"""
+
+[[target]]
+id = "roetteler_2017_p256_absolute"
+circuit = "shor_ecdlp_rnsl"
+layer = "logical"
+
+[target.source]
+arxiv = "1706.06752"
+title = "Quantum resource estimates for computing elliptic curve discrete logarithms"
+year = 2017
+locus = "Fig. 11 discussion, full expression including regression term"
+retrieved = "2026-08-28"
+
+[target.problem]
+kind = "ecdlp"
+curve_bits = 256
+
+[target.expected]
+toffoli_count = { value = 1.287e11, tolerance_pct = 25.0, formula = "448 n^3 log2 n + 4090 n^3" }
+
+[target.notes]
+text = """
+Expected to fail pending derivation of the sub-leading regression term. Note this
+workstream has been DEPRIORITISED: closing a 2x gap against a 2017 constant would make
+PRAMANA reproduce a superseded construction more precisely while its headline ECDLP figure
+remains ~2,300x too pessimistic. Implementing the 2026 constructions is worth far more.
+See docs/RESEARCH.md section 1.4.
+"""

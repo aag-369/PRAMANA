@@ -1,0 +1,79 @@
+# Independently verified logical-qubit demonstrations.
+#
+# These are the ONLY entries that enter PRAMANA's capability fit. Press-release qubit
+# counts and announced targets are held separately, because "logical qubit" has meant
+# different things across announcements and a fit contaminated by definitional drift is
+# worse than no fit.
+#
+# last_verified = 2026-08-29
+
+[[milestone]]
+vendor = "Google"
+modality = "superconducting"
+name = "Willow surface-code memory"
+year = 2024
+logical_qubits = 1
+physical_qubits = 105
+verified = true
+status = "delivered"
+citation = "Nature, December 2024; below-threshold surface code memory"
+note = "105:1 physical-to-logical. The surface code is space-hungry by construction."
+
+[[milestone]]
+vendor = "Quantinuum + Microsoft"
+modality = "trapped_ion"
+name = "H2 logical qubits"
+year = 2024
+logical_qubits = 12
+physical_qubits = 56
+verified = true
+status = "delivered"
+citation = "Microsoft/Quantinuum joint announcement, 2024"
+
+[[milestone]]
+vendor = "Atom Computing"
+modality = "neutral_atom"
+name = "24 logical qubits"
+year = 2025
+logical_qubits = 24
+physical_qubits = 1180
+verified = true
+status = "delivered"
+citation = "Atom Computing / Microsoft, 2025"
+note = "49:1 ratio; large array, comparatively low encoding efficiency."
+
+[[milestone]]
+vendor = "Quantinuum"
+modality = "trapped_ion"
+name = "Helios"
+year = 2025
+logical_qubits = 48
+physical_qubits = 98
+verified = true
+status = "delivered"
+citation = "Quantinuum Helios commercial launch, November 2025"
+note = "2:1 ratio, the most efficient encoding demonstrated to date."
+
+[[milestone]]
+vendor = "QuEra"
+modality = "neutral_atom"
+name = "96 logical qubits"
+year = 2026
+logical_qubits = 96
+physical_qubits = 448
+verified = true
+status = "delivered"
+citation = "Nature, January 2026; [[16,6,4]] high-rate codes, below-threshold suppression"
+note = "4.7:1 ratio. Implies ~1000 logical qubits at ~4700 atoms, which is the arithmetic that matters against a 2026 ECDLP circuit needing 835-1450 logical qubits."
+
+[[milestone]]
+vendor = "Nord Quantique"
+modality = "bosonic"
+name = "GKP single-mode logical qubit"
+year = 2025
+logical_qubits = 1
+physical_qubits = 1
+verified = true
+status = "delivered"
+citation = "Nord Quantique, 2025; GKP bosonic encoding"
+note = "1:1 ratio, but a single mode carries substantial control hardware that a bare qubit count does not capture."

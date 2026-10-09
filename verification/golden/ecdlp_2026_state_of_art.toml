@@ -1,0 +1,121 @@
+# The 2026 ECDLP constructions.
+#
+# These supersede Roetteler 2017 by roughly 2,300x on gate count and 2.8x on width. They
+# are declared here as PENDING targets so the harness reports honestly that PRAMANA's
+# live ECDLP estimate is three generations behind the state of the art, rather than
+# leaving that fact only in a research document.
+#
+# See docs/RESEARCH.md section 1 for the full descent and the driving techniques.
+
+[[target]]
+id = "schrottenloher_2026_secp256k1_gate_optimised"
+circuit = "shor_ecdlp_schrottenloher_2026"
+layer = "logical"
+
+[target.source]
+arxiv = "2606.02235"
+title = "Optimized Point Addition Circuits for Elliptic Curve Discrete Logarithms"
+year = 2026
+locus = "Table 2, gate-optimised for secp256k1"
+retrieved = "2026-08-29"
+
+[target.problem]
+kind = "ecdlp"
+curve_bits = 256
+
+[target.expected]
+logical_qubits = { value = 1462.0, tolerance_pct = 5.0 }
+toffoli_count = { value = 5.762e7, tolerance_pct = 30.0, formula = "28 * (3*2^16 + 2^20.83)" }
+
+[target.notes]
+text = """
+Open reconstruction of the circuits Babbush et al. reported behind a zero-knowledge proof.
+PRAMANA builds this structurally from the split extended Euclidean algorithm: a Euclidean
+pass recording branch decisions into a compressed garbage vector, then a Bezout replay that
+performs the inversion and an in-place multiplication in one go.
+Reference implementation: gitlab.inria.fr/capsule/qarton-projects/ec-point-addition
+"""
+
+[[target]]
+id = "schrottenloher_2026_secp256k1_space_optimised"
+circuit = "shor_ecdlp_schrottenloher_2026_space"
+layer = "logical"
+
+[target.source]
+arxiv = "2606.02235"
+title = "Optimized Point Addition Circuits for Elliptic Curve Discrete Logarithms"
+year = 2026
+locus = "Table 2, space-optimised for secp256k1"
+retrieved = "2026-08-29"
+
+[target.problem]
+kind = "ecdlp"
+curve_bits = 256
+
+[target.expected]
+logical_qubits = { value = 1208.0, tolerance_pct = 5.0 }
+toffoli_count = { value = 7.243e7, tolerance_pct = 30.0, formula = "28 * (3*2^16 + 2^21.19)" }
+
+[target.notes]
+text = """
+The other end of the frontier. Ancilla-free CDKM arithmetic in the Bezout replay saves
+about n qubits and costs gates. Reporting both points prevents the two from being conflated,
+which is the error that produced an incoherent gate floor earlier in this project.
+"""
+
+[[target]]
+id = "luo_2026_ecdlp256_width_record"
+circuit = "shor_ecdlp_luo_2026"
+layer = "logical"
+
+[target.source]
+arxiv = "2607.13816"
+title = "Quantum Algorithm for Elliptic Curve Discrete Logarithms with Space-Efficient Point Addition"
+year = 2026
+locus = "abstract"
+retrieved = "2026-08-29"
+
+[target.problem]
+kind = "ecdlp"
+curve_bits = 256
+
+[target.expected]
+logical_qubits = { value = 835.0, tolerance_pct = 5.0, formula = "3n + 6 floor(log2 n) + O(1)" }
+toffoli_count = { value = 3.7e8, tolerance_pct = 40.0, formula = "919 n^3 / log2 n + O(n^2)" }
+
+[target.notes]
+text = """
+Current width record. Modular inversion in 2n + 6 floor(log2 n) + O(1) qubits and
+195n^2 + O(n log2 n) Toffoli, via register-sharing refinements over Proos-Zalka with
+length registers and location-controlled arithmetic, plus mid-circuit measurement and
+classical feed-forward. Supersedes the same authors' arXiv:2604.02311.
+"""
+
+[[target]]
+id = "ecdlp_data_register_floor"
+circuit = "shor_ecdlp_any"
+layer = "logical"
+
+[target.source]
+arxiv = "quant-ph/0301141"
+title = "Shor's discrete logarithm quantum algorithm for elliptic curves"
+year = 2003
+locus = "the 2n data-register observation"
+retrieved = "2026-08-29"
+
+[target.problem]
+kind = "ecdlp"
+curve_bits = 256
+
+[target.expected]
+logical_qubits = { value = 512.0, comparator = "greater_than", formula = "2n" }
+
+[target.notes]
+text = """
+FLOOR CHECK, not a reproduction. An elliptic-curve point is two coordinates over an n-bit
+field, so no construction in the standard two-coordinate representation can hold fewer
+than 2n data qubits. Any PRAMANA estimate falling below this is a bug, not a breakthrough.
+A sub-2n regime would require an x-only double-scalar point addition, which is an open
+problem: x-only differential addition is built for single-base ladders and ECDLP needs
+[a]P + [b]Q over two independent base points.
+"""

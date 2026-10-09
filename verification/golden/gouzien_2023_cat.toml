@@ -1,0 +1,36 @@
+# Published figures from Gouzien, Ruiz, Le Regent, Guillaud & Sangouard 2023.
+
+[[target]]
+id = "gouzien_2023_ecdlp256_cat"
+circuit = "shor_ecdlp_rnsl"
+architecture = "repetition_cat"
+layer = "physical"
+
+[target.source]
+arxiv = "2302.06639"
+title = "Performance analysis of a repetition cat code architecture: computing 256-bit elliptic curve logarithm in 9 hours with 126133 cat qubits"
+journal = "Phys. Rev. Lett. 131, 040602 (2023)"
+year = 2023
+locus = "title and abstract"
+retrieved = "2026-08-28"
+
+[target.problem]
+kind = "ecdlp"
+curve_bits = 256
+
+[target.hardware]
+physical_error_rate = 1e-5
+cycle_time_us = 0.5
+reaction_time_us = 0.5
+connectivity = "square_grid_nearest_neighbour"
+
+[target.expected]
+physical_qubits = { value = 126133.0, tolerance_pct = 40.0 }
+wall_clock_hours = { value = 9.0, tolerance_pct = 50.0 }
+
+[target.notes]
+text = """
+Assumes a single-to-two-photon loss ratio of 1e-5, a 500 ns cycle time, and about 19
+photons per cat state. PRAMANA derives the repetition distance from those parameters
+rather than assuming one.
+"""

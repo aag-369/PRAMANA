@@ -1,0 +1,11 @@
+[package]
+name = "pramana-units"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Dimensionally-typed quantities for cryptographic resource estimation (PRAMANA Law 6)"
+
+[dependencies]
+serde = { workspace = true }
+thiserror = { workspace = true }

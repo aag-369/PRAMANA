@@ -1,0 +1,19 @@
+[package]
+name = "pramana-py"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Python bindings for the PRAMANA estimation core"
+
+[lib]
+name = "pramana"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+pramana-units = { path = "../pramana-units" }
+pramana-circuit = { path = "../pramana-circuit" }
+pramana-qec = { path = "../pramana-qec" }
+pramana-hardware = { path = "../pramana-hardware" }
+pramana-risk = { path = "../pramana-risk" }
+pyo3 = { version = "0.20", features = ["extension-module"] }

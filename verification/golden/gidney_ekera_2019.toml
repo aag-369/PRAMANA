@@ -1,0 +1,63 @@
+# Published figures from Gidney & Ekera 2019. Consumed ONLY by the verification
+# harness, never by the estimation path (spec Law 1).
+
+[[target]]
+id = "gidney_ekera_2019_rsa2048_logical"
+circuit = "shor_factoring_ge19"
+layer = "logical"
+
+[target.source]
+arxiv = "1905.09749"
+title = "How to factor 2048 bit RSA integers in 8 hours using 20 million noisy qubits"
+journal = "Quantum 5, 433 (2021)"
+year = 2019
+locus = "abstract; abstract circuit model excluding distillation, routing and error correction"
+retrieved = "2026-08-28"
+
+[target.problem]
+kind = "rsa_factoring"
+modulus_bits = 2048
+
+[target.expected]
+logical_qubits = { value = 6189.0, tolerance_pct = 5.0, formula = "3n + 0.002 n lg n" }
+toffoli_count = { value = 2.6242e9, tolerance_pct = 25.0, formula = "0.3 n^3 + 0.0005 n^3 lg n" }
+
+[target.notes]
+text = """
+The paper states 3 billion Toffoli gates and 'a bit more than 3n' logical qubits for
+RSA-2048, consistent with the closed forms above.
+"""
+
+[[target]]
+id = "gidney_ekera_2019_rsa2048_physical"
+circuit = "shor_factoring_ge19"
+architecture = "surface_code_intermediate_distillation"
+layer = "physical"
+
+[target.source]
+arxiv = "1905.09749"
+title = "How to factor 2048 bit RSA integers in 8 hours using 20 million noisy qubits"
+journal = "Quantum 5, 433 (2021)"
+year = 2019
+locus = "title and abstract"
+retrieved = "2026-08-28"
+
+[target.problem]
+kind = "rsa_factoring"
+modulus_bits = 2048
+
+[target.hardware]
+physical_error_rate = 0.001
+cycle_time_us = 1.0
+reaction_time_us = 10.0
+connectivity = "square_grid_nearest_neighbour"
+
+[target.expected]
+physical_qubits = { value = 2.0e7, tolerance_pct = 40.0 }
+wall_clock_hours = { value = 8.0, tolerance_pct = 40.0 }
+
+[target.notes]
+text = """
+The full causal chain: circuit synthesised from the modulus size, then costed through the
+surface-code model. No published figure is consulted along the way.
+"""

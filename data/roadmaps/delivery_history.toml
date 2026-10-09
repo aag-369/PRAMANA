@@ -1,0 +1,66 @@
+# Delivered milestones with a recorded announcement year, for fitting the slip prior.
+#
+# CAVEAT, and it is a serious one. The observed sample is small and dominated by IBM's
+# physical-qubit milestones, which the company delivered close to schedule. Error-correction
+# and logical-qubit milestones are the ones that historically slip, and almost none have
+# been through a full announce-to-deliver cycle yet. A slip prior fitted on this data alone
+# will be optimistic. PRAMANA surfaces the sample size in its warnings rather than hiding
+# behind a fitted distribution.
+#
+# last_verified = 2026-08-29
+
+[[milestone]]
+vendor = "IBM"
+modality = "superconducting"
+name = "Eagle"
+year = 2021
+announced_in = 2020
+physical_qubits = 127
+verified = false
+status = "delivered"
+citation = "IBM quantum roadmap 2020; delivered 2021"
+
+[[milestone]]
+vendor = "IBM"
+modality = "superconducting"
+name = "Osprey"
+year = 2022
+announced_in = 2020
+physical_qubits = 433
+verified = false
+status = "delivered"
+citation = "IBM quantum roadmap 2020; delivered 2022"
+
+[[milestone]]
+vendor = "IBM"
+modality = "superconducting"
+name = "Condor"
+year = 2023
+announced_in = 2020
+physical_qubits = 1121
+verified = false
+status = "delivered"
+citation = "IBM quantum roadmap 2020; delivered 2023"
+
+[[milestone]]
+vendor = "IBM"
+modality = "superconducting"
+name = "Heron"
+year = 2023
+announced_in = 2022
+physical_qubits = 133
+verified = false
+status = "delivered"
+citation = "IBM quantum roadmap; delivered 2023"
+
+[[milestone]]
+vendor = "Quantinuum"
+modality = "trapped_ion"
+name = "Helios"
+year = 2025
+announced_in = 2024
+logical_qubits = 48
+physical_qubits = 98
+verified = true
+status = "delivered"
+citation = "Quantinuum roadmap 2024; delivered November 2025"

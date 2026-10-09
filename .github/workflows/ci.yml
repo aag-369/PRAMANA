@@ -1,0 +1,111 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  laws:
+    name: Enforce the PRAMANA laws
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      # The specification requires CI to fail where a law is mechanically checkable.
+      # Law 1 in particular: published results must never reach production code, or the
+      # estimation path could read an answer instead of computing one.
+      - name: Check laws
+        run: python3 scripts/check_laws.py
+
+  rust:
+    name: Rust tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --workspace --all-targets -- -D warnings
+      - run: cargo test --workspace
+
+  verification:
+    name: Reproduce published figures
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      # The harness exits non-zero on any unwaived failure, and unconditionally on a
+      # waiver applied to the keystone target. A regression against the last committed
+      # report is therefore a build failure, not a silent drift.
+      - name: Run the reproduction harness
+        run: PRAMANA_ROOT=. cargo run --release -p pramana-verify
+      - name: Upload the report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verification-report
+          path: verification/reports/
+
+  determinism:
+    name: Determinism
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      # Law 5: the same manifest must reproduce byte-identical results.
+      - run: bash scripts/check_determinism.sh
+
+  backend:
+    name: Backend tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: Swatinem/rust-cache@v2
+      - name: Build the estimation core
+        run: |
+          cargo build --release -p pramana-py
+          mkdir -p build
+          cp target/release/libpramana.so build/pramana.so
+      - name: Install backend
+        run: pip install -e 'backend[dev]'
+      - run: cd backend && python -m pytest tests/ -q
+
+  frontend:
+    name: Frontend build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: cd frontend && npm ci
+      - run: cd frontend && npm run build
+
+  security:
+    name: Dependency audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: cargo install cargo-audit --locked
+      - run: cargo audit
+      - run: pip install pip-audit && pip-audit -r <(pip freeze) || true

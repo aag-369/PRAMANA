@@ -1,0 +1,84 @@
+# The published resource-estimate series.
+#
+# These are the observations the algorithmic-improvement term is fitted from. They live in
+# a data file rather than as constants in the estimation crates for two reasons.
+#
+# First, Law 1: a published figure embedded in production code is indistinguishable, to a
+# reader or a static check, from a lookup table of answers. Here they are declared data with
+# provenance, in the same way vendor roadmaps are.
+#
+# Second, this series is itself a finding. No other resource estimator models the rate at
+# which attack costs fall, and the rate differs sharply by problem family. Keeping the
+# series versioned and citable makes it possible to publish and to update as new results
+# land.
+#
+# last_verified = 2026-08-29
+
+[[series]]
+family = "factoring"
+metric = "toffoli"
+note = "Gate count rose while width fell: this line of work spent its progress on space."
+
+[[series.point]]
+year = 2019
+value = 2.6e9
+source = "Gidney & Ekera, arXiv:1905.09749"
+
+[[series.point]]
+year = 2025
+value = 6.5e9
+source = "Gidney, arXiv:2505.15917, Table 5"
+
+[[series]]
+family = "factoring"
+metric = "logical_qubits"
+note = "Where factoring's progress actually went, via approximate residue arithmetic."
+
+[[series.point]]
+year = 2019
+value = 6189
+source = "Gidney & Ekera, arXiv:1905.09749 (3n + 0.002 n lg n at n=2048)"
+
+[[series.point]]
+year = 2025
+value = 1399
+source = "Gidney, arXiv:2505.15917, Table 5"
+
+[[series]]
+family = "ecdlp"
+metric = "toffoli"
+note = """
+Extraordinarily fast, reflecting a field catching up after two decades in which factoring
+absorbed most of the optimisation effort. The uncertainty on the fitted rate is set wide
+because a catch-up rate should not be expected to persist.
+"""
+
+[[series.point]]
+year = 2017
+value = 1.29e11
+source = "Roetteler et al., arXiv:1706.06752 (448 n^3 lg n + 4090 n^3 at n=256)"
+
+[[series.point]]
+year = 2023
+value = 2.0e8
+source = "Litinski, arXiv:2306.08585"
+
+[[series.point]]
+year = 2026
+value = 5.762e7
+source = "Schrottenloher, arXiv:2606.02235, Table 2 (gate-optimised secp256k1)"
+
+[[series]]
+family = "ecdlp"
+metric = "logical_qubits"
+note = "Approaching the 2n data-register floor of Proos-Zalka."
+
+[[series.point]]
+year = 2017
+value = 2330
+source = "Roetteler et al., arXiv:1706.06752 (9n + 2 ceil(lg n) + 10 at n=256)"
+
+[[series.point]]
+year = 2026
+value = 835
+source = "Luo et al., arXiv:2607.13816 (3n + 6 floor(log2 n) + O(1) at n=256)"

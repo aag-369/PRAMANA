@@ -1,0 +1,19 @@
+[package]
+name = "pramana-risk"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Break-year distributions, Mosca resolution and exposure scoring"
+
+[dependencies]
+pramana-units = { path = "../pramana-units" }
+pramana-circuit = { path = "../pramana-circuit" }
+pramana-qec = { path = "../pramana-qec" }
+pramana-hardware = { path = "../pramana-hardware" }
+serde = { workspace = true }
+toml = { workspace = true }
+thiserror = { workspace = true }
+rand = { workspace = true }
+rand_chacha = { workspace = true }
+rand_distr = { workspace = true }

@@ -1,0 +1,116 @@
+# Publicly announced targets. NOT admissible into the capability fit; used only for the
+# roadmap-versus-history comparison and for the slip prior.
+#
+# last_verified = 2026-08-29
+
+[[milestone]]
+vendor = "Atom Computing + Microsoft + QuNorth"
+modality = "neutral_atom"
+name = "Magne"
+year = 2026
+logical_qubits = 50
+announced_in = 2025
+status = "announced"
+citation = "Magne system announcement"
+
+[[milestone]]
+vendor = "IBM"
+modality = "superconducting"
+name = "Kookaburra"
+year = 2026
+announced_in = 2025
+status = "announced"
+citation = "IBM quantum roadmap"
+note = "First qLDPC memory module with an attached logic processing unit."
+
+[[milestone]]
+vendor = "IBM"
+modality = "superconducting"
+name = "Cockatoo"
+year = 2027
+announced_in = 2025
+status = "announced"
+citation = "IBM quantum roadmap"
+note = "Inter-module entanglement via l-couplers."
+
+[[milestone]]
+vendor = "Quantinuum"
+modality = "trapped_ion"
+name = "Sol"
+year = 2027
+logical_qubits = 100
+announced_in = 2025
+status = "announced"
+citation = "Quantinuum accelerated roadmap"
+
+[[milestone]]
+vendor = "Pasqal"
+modality = "neutral_atom"
+name = "next-generation system"
+year = 2027
+logical_qubits = 100
+announced_in = 2025
+status = "announced"
+citation = "Pasqal roadmap"
+
+[[milestone]]
+vendor = "QuEra"
+modality = "neutral_atom"
+name = "next-generation tweezer array"
+year = 2027
+logical_qubits = 200
+announced_in = 2026
+status = "announced"
+citation = "QuEra roadmap"
+
+[[milestone]]
+vendor = "IBM"
+modality = "superconducting"
+name = "Starling"
+year = 2029
+logical_qubits = 200
+announced_in = 2025
+status = "announced"
+citation = "IBM large-scale FTQC roadmap"
+note = "200 logical qubits running 100 million gates."
+
+[[milestone]]
+vendor = "Quantinuum"
+modality = "trapped_ion"
+name = "Apollo"
+year = 2029
+announced_in = 2024
+status = "announced"
+citation = "Quantinuum accelerated roadmap"
+note = "Universal fully fault-tolerant; hundreds of logical qubits, millions of operations."
+
+[[milestone]]
+vendor = "IonQ"
+modality = "trapped_ion"
+name = "post-SkyWater scale-up"
+year = 2029
+physical_qubits = 200000
+announced_in = 2026
+status = "announced"
+citation = "IonQ, following the January 2026 SkyWater acquisition"
+
+[[milestone]]
+vendor = "PsiQuantum"
+modality = "photonic"
+name = "utility-scale photonic system"
+year = 2029
+physical_qubits = 1000000
+announced_in = 2024
+status = "announced"
+citation = "PsiQuantum roadmap"
+
+[[milestone]]
+vendor = "IBM"
+modality = "superconducting"
+name = "Blue Jay"
+year = 2033
+logical_qubits = 2000
+announced_in = 2025
+status = "announced"
+citation = "IBM large-scale FTQC roadmap"
+note = "2000 logical qubits running 1 billion gates."

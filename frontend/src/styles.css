@@ -1,0 +1,55 @@
+:root {
+  --ink: #16181d;
+  --muted: #5b6472;
+  --line: #dfe3e8;
+  --paper: #ffffff;
+  --panel: #f7f8fa;
+  --alarm: #b3261e;
+  --accent: #21918c;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #e8eaee;
+    --muted: #9aa3b2;
+    --line: #2b303a;
+    --paper: #14161b;
+    --panel: #1b1e25;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.5;
+}
+header { border-bottom: 1px solid var(--line); padding: 16px 24px; }
+h1 { font-size: 17px; margin: 0; letter-spacing: -0.01em; }
+h2 { font-size: 14px; margin: 28px 0 10px; }
+.sub { color: var(--muted); font-size: 12px; margin-top: 4px; }
+main { padding: 20px 24px 60px; max-width: 1400px; }
+nav { display: flex; gap: 4px; margin: 16px 0; flex-wrap: wrap; }
+nav button {
+  border: 1px solid var(--line); background: var(--paper); color: var(--muted);
+  padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 13px;
+}
+nav button[aria-selected="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--line); }
+th { color: var(--muted); font-weight: 500; font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; margin-bottom: 14px; }
+.warn { color: var(--alarm); }
+.muted { color: var(--muted); }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+.chip { display: inline-block; padding: 1px 7px; border-radius: 999px; border: 1px solid var(--line); font-size: 11px; color: var(--muted); }
+.bar { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; min-width: 60px; }
+.bar > i { display: block; height: 100%; background: var(--accent); }
+.figure { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+.figure img { display: block; max-width: none; }
+details summary { cursor: pointer; color: var(--muted); font-size: 12px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.stat { font-size: 20px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.err { color: var(--alarm); font-size: 13px; }
