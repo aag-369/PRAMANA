@@ -9,7 +9,6 @@ by synthesising the attack circuit, costing its error correction across multiple
 fault-tolerant architectures, and resolving Mosca's inequality against the asset's
 data-retention requirement.
 
-The full specification is in [`PRAMANA_BUILD_PROMPT.md`](PRAMANA_BUILD_PROMPT.md).
 Every assumption the system makes is catalogued in [`docs/ASSUMPTIONS.md`](docs/ASSUMPTIONS.md).
 Current build state and honest divergences are in [`docs/STATUS.md`](docs/STATUS.md).
 
